@@ -1,4 +1,5 @@
 package Protocol::XMPP::Handler;
+
 use strict;
 use warnings;
 use parent qw(XML::SAX::Base);

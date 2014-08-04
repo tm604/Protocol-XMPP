@@ -1,4 +1,5 @@
 package Protocol::XMPP::Contact;
+
 use strict;
 use warnings;
 use parent qw{Protocol::XMPP::Base};
@@ -6,10 +7,6 @@ use parent qw{Protocol::XMPP::Base};
 =head1 NAME
 
 Protocol::XMPP::Stream - handle XMPP protocol stream
-
-=head1 SYNOPSIS
-
-=head1 DESCRIPTION
 
 =head1 METHODS
 

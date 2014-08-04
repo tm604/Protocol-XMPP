@@ -1,4 +1,5 @@
 package Protocol::XMPP::Element::Response;
+
 use strict;
 use warnings;
 use parent qw(Protocol::XMPP::ElementBase);

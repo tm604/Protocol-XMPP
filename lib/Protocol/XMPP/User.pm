@@ -1,6 +1,13 @@
 package Protocol::XMPP::User;
+
 use strict;
 use warnings;
+
+=head1 NAME
+
+Protocol::XMPP::User - user-related functionality
+
+=cut
 
 use Protocol::XMPP::Roster;
 

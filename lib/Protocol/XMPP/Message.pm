@@ -1,4 +1,5 @@
 package Protocol::XMPP::Message;
+
 use strict;
 use warnings;
 use parent qw(Protocol::XMPP::Base);

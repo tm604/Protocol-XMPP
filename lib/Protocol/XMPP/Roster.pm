@@ -1,6 +1,13 @@
 package Protocol::XMPP::Roster;
+
 use strict;
 use warnings;
+
+=head1 NAME
+
+Protocol::XMPP::Roster - handle XMPP protocol stream
+
+=cut
 
 sub new { my $class = shift; bless { @_ }, $class; }
 

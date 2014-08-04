@@ -1,4 +1,5 @@
 package Protocol::XMPP::IQ::Roster;
+
 use strict;
 use warnings;
 use parent qw(Protocol::XMPP::ElementBase);

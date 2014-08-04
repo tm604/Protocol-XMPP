@@ -1,4 +1,5 @@
 package Protocol::XMPP::Stream;
+
 use strict;
 use warnings;
 use parent qw{Protocol::XMPP::Base};

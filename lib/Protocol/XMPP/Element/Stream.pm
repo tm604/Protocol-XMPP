@@ -1,18 +1,12 @@
 package Protocol::XMPP::Element::Stream;
-BEGIN {
-  $Protocol::XMPP::Element::Stream::VERSION = '0.005';
-}
+
 use strict;
 use warnings;
 use parent qw(Protocol::XMPP::ElementBase);
 
 =head1 NAME
 
-Protocol::XMPP::Stream - broker for setting up internal state and triggering reponses based on supported features
-
-=head1 VERSION
-
-version 0.005
+Protocol::XMPP::Element::Stream - handle the stream start/end tags
 
 =head1 SYNOPSIS
 
