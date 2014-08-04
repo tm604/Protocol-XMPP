@@ -1,4 +1,8 @@
 {{$NEXT}}
+	New features:
+	* Avoid hardcoded debug flag (oops)
+
+	Thanks to frew for helping with testing, bug fixing and documentation.
 
 0.005     2011-02-20 01:33:44 Europe/London
 	Add missing Module::Load dependency
