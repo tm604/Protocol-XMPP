@@ -18,9 +18,15 @@ use Module::Load ();
 # mainly used for debugging / tracing which modules were loaded
 my %ClassLoaded;
 
-sub classFromElement {
+sub class_from_element {
 	my $self = shift;
 	my $name = shift;
+	# Allow entries on the stack to have the first
+	# go at handling the element.
+	if($self->{stack} && $self->{stack}[-1]) {
+		my $local = $self->{stack}[-1]->class_from_element($name);
+		return $local if $local;
+	}
 	my $class = {
 		'unknown'		=> '',
 
@@ -48,6 +54,7 @@ sub classFromElement {
 		'subject'		=> 'Protocol::XMPP::Element::Subject',
 		'active'		=> 'Protocol::XMPP::Element::Active',
 		'nick'			=> 'Protocol::XMPP::Element::Nick',
+		'stream:stream'	=> 'Protocol::XMPP::Element::Stream',
 	}->{$name || 'unknown'} or return '';
 	unless($ClassLoaded{$class}) {
 		Module::Load::load($class);
@@ -73,7 +80,7 @@ sub debug {
 
 sub parent {
 	my $self = shift;
-	my ($parent) = grep { defined } reverse @{$self->{stack}};
+	my ($parent) = grep { defined } reverse @{$self->{stack} ||= []};
 	return $parent;
 }
 
@@ -87,7 +94,7 @@ sub start_element {
 
 # Find an appropriate class for this element
 	my $v = $element->{Name};
-	my $class = $self->classFromElement($v);
+	my $class = $self->class_from_element($v);
 
 	if($class) {
 		my $obj = $class->new(

@@ -15,7 +15,7 @@ Protocol::XMPP::Feature - register ability to deal with a specific feature
 
 =cut
 
-sub from { shift->{from} || '' }
+sub from { my $self = shift; $self->{from} // $self->stream->jid }
 sub to { shift->{to} || '' }
 sub subject { shift->{subject} || '' }
 sub body { shift->{body} || '' }
@@ -31,7 +31,15 @@ sub reply {
 sub send {
 	my $self = shift;
 	my %args = @_;
-	$self->write_xml(['message', 'from' => $self->from, 'to' => $self->to, type => $self->type, _content => [[ 'body', _content => $self->body ]]]);
+	$self->write_xml([
+		'message',
+		'to' => $self->to,
+		type => $self->type,
+		_content => [[
+			'body',
+			_content => $self->body
+		]]
+	]);
 }
 
 1;

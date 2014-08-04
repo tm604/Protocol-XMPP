@@ -18,6 +18,10 @@ Protocol::XMPP::Success - indicate success for an operation
 sub end_element {
 	my $self = shift;
 	$self->debug("Successful response");
+	# On successful authorisation, we need to start a new stream (without closing
+	# the original one) so that we can go through stream header negotiation again:
+	# authorisation may have enabled additional features that were not advertised
+	# previously.
 	$self->stream->reset;
 	$self->write_text(@{$self->stream->preamble});
 	$self->is_authorised(1);

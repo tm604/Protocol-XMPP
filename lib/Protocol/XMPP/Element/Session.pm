@@ -24,7 +24,18 @@ sub end_element {
 	return unless $self->parent->isa('Protocol::XMPP::Element::Features');
 
 	$self->debug("Had session request");
-	$self->write_xml(['iq', 'type' => 'set', id => $self->next_id, _content => [[ 'session', '_ns' => 'xmpp-session' ]] ]);
+	$self->parent->push_pending(my $f = $self->stream->new_future);
+	my $id = $self->next_id;
+	$self->stream->pending_iq($id => $f);
+	$self->write_xml([
+		'iq',
+		'type' => 'set',
+		id => $id,
+		_content => [[
+			'session',
+			'_ns' => 'xmpp-session'
+		]]
+	]);
 }
 
 1;

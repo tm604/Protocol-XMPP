@@ -24,7 +24,18 @@ sub end_element {
 	return unless $self->parent->isa('Protocol::XMPP::Element::Features');
 
 	$self->debug("Had bind request");
-	$self->write_xml(['iq', 'type' => 'set', id => $self->next_id, _content => [[ 'bind', '_ns' => 'xmpp-bind' ]] ]);
+	$self->parent->push_pending(my $f = $self->stream->new_future);
+	my $id = $self->next_id;
+	$self->stream->pending_iq($id => $f);
+	$self->write_xml([
+		'iq',
+		'type' => 'set',
+		id => $id,
+		_content => [[
+			'bind',
+			'_ns' => 'xmpp-bind'
+		]]
+	]);
 }
 
 1;

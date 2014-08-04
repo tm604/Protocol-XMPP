@@ -22,6 +22,8 @@ Protocol::XMPP::Bind - register ability to deal with a specific feature
 sub end_element {
 	my $self = shift;
 	$self->debug("IQ data");
+	my $id = $self->attributes->{id};
+	$self->stream->iq_complete($id => $self);
 }
 
 1;

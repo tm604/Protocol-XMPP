@@ -67,6 +67,17 @@ sub end_element {
 	$self->debug("Virtual end_element for $_[0]");
 }
 
+=head2 class_from_element
+
+Returns a class suitable for handling the given element,
+if we have one.
+
+If we don't have a local handler, returns undef.
+
+=cut
+
+sub class_from_element { undef }
+
 1;
 
 __END__

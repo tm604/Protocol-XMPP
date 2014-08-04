@@ -1,7 +1,10 @@
 package Protocol::XMPP::Base;
 use strict;
 use warnings;
+use parent qw(Mixin::Event::Dispatch);
+use constant EVENT_DISPATCH_ON_FALLBACK => 0;
 
+use Future;
 use Scalar::Util ();
 
 # For debug messages
@@ -28,7 +31,14 @@ Constructor. Stores all parameters on $self, including the top level stack item 
 
 sub new {
 	my $class = shift;
-	return bless { @_ }, $class;
+	return bless {
+		future_factory => sub { Future->new },
+		@_
+	}, $class;
+}
+
+sub new_future {
+	shift->{future_factory}->()
 }
 
 =head2 debug

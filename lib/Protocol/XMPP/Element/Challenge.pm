@@ -39,8 +39,11 @@ sub end_element {
 	my $response = MIME::Base64::encode_base64(defined $token ? $token : '', '');
 	$token = '=' unless defined $response && length $response;
 
-	$self->write_xml(['response', _ns => 'xmpp-sasl', _content => $response]);
-	$self;
+	$self->write_xml([
+		'response',
+		_ns => 'xmpp-sasl',
+		_content => $response
+	]);
 }
 
 1;
