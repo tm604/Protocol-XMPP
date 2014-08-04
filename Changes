@@ -1,6 +1,10 @@
 {{$NEXT}}
 	New features:
+	* API updates to support Futures
+
+	Bugs fixed:
 	* Avoid hardcoded debug flag (oops)
+	* Fixed SASL auth handling (was adding then removing a stray '1' from the SASL string)
 
 	Thanks to frew for helping with testing, bug fixing and documentation.
 
